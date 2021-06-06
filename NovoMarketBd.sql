@@ -1,5 +1,6 @@
 create database novomarket;                         
 use novomarket;
+/**/
 
 /*Tabla cliente*/
 create table Cliente(
@@ -11,6 +12,22 @@ numcli char(8)not null
 select*from cliente;
 insert into Cliente values(1,"Luis","Zavala Terrones","95874153");
 insert into Cliente values(2,"Rodrigo","Sarazu Taipe","95874153");
+
+
+create table proveedor(
+	idprove int primary key not null auto_increment,
+    nomprove varchar(50) not null,
+    ruc int(8) not null,
+    nomcontacto varchar(50) not null,
+    direccion varchar(90) not null,
+    telefono char(9) not null
+);
+ 
+insert into proveedor values(1,'San Fernando',45214589,'Juan Guerra','AV. Las Colmenas 750',998542138);
+/*insert into proveedor values(1,"Av.Alfonso Ugarte","Juan Garcia","Metro",700214536,235146);*/
+	
+
+
 
 create table MetodoPago(
 idmetpago int primary key not null auto_increment,
@@ -38,18 +55,20 @@ select*from categorias;
 create table Producto(
 idprod int primary key not null auto_increment,
 idcat int not null,
+idprove int not null,
 nomprod varchar(30)not null,
 fechavenc datetime not null,
 precio double not null,
 stock_min int not null,
 stock_act int not null,
 foto varchar(150)not null,
-foreign key(idcat)references categorias(idcat)
+foreign key(idcat)references categorias(idcat),
+foreign key(idprove)references proveedor(idprove)
 );
 
 select*from Producto;
 
-insert into Producto values(1,1,'Pepsi cola','2020-12-22',2.50,3,30,'pepsi.png');
+insert into Producto values(1,1,1,'Pepsi cola','2020-12-22',2.50,3,30,'pepsi.png');
 
 /*tabla domicilio*/
 
